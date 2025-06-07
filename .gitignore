@@ -11,6 +11,7 @@ env/
 .venv/
 venv/
 ENV/
+.env
 
 # 📦 Dependency files
 *.egg-info/
@@ -35,3 +36,5 @@ build/
 # 📁 OS files
 .DS_Store
 Thumbs.db
+
+Session.py
