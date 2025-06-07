@@ -1,0 +1,37 @@
+# 🐍 Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+
+# 🧪 Virtual environment
+env/
+.venv/
+venv/
+ENV/
+
+# 📦 Dependency files
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# 📋 Logs and runtime files
+*.log
+*.sqlite3
+
+# ⚙️ IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 🐘 Telethon sessions
+*.session
+*.session-journal
+
+# 📁 OS files
+.DS_Store
+Thumbs.db
