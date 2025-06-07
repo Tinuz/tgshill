@@ -30,4 +30,4 @@ jobs:
           echo "SESSION_STRING=${{ secrets.SESSION_STRING }}" >> .env
 
       - name: Run shill bot
-        run: python apps/tgshill/shill_bot.py
+        run: python shill_bot.py
