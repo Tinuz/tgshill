@@ -8,6 +8,9 @@ on:
 jobs:
   run-shill-bot:
     runs-on: ubuntu-latest
+    concurrency:
+      group: telegram-shill-bot
+      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
