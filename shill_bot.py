@@ -118,9 +118,19 @@ async def main():
     async with TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH) as client:
         groups_to_send = random.sample(GROUPS, k=random.randint(3, min(7, len(GROUPS))))
         random.shuffle(groups_to_send)
-        for group in groups_to_send:
+        total_groups = len(groups_to_send)
+        # Verdeel 30 minuten (1800 seconden) over het aantal groepen
+        min_wait = 10  # minimaal 10 seconden tussen berichten
+        max_total_time = 1800  # 30 minuten in seconden
+        if total_groups > 1:
+            max_wait = max(min_wait, (max_total_time // (total_groups - 1)))
+        else:
+            max_wait = min_wait
+        for idx, group in enumerate(groups_to_send):
             msg = random.choice(MESSAGES)
             await send_shill_message(client, group, msg)
-            await asyncio.sleep(random.uniform(300, 1200))  # 5 tot 20 minuten
+            if idx < total_groups - 1:
+                # Wacht tussen min_wait en max_wait seconden
+                await asyncio.sleep(random.uniform(min_wait, max_wait))
 
 asyncio.run(main())
