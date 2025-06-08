@@ -4,7 +4,7 @@ import os
 import requests
 from telethon.sync import TelegramClient
 from telethon.errors import FloodWaitError
-from telethon.errors.rpcerrorlist import ChatSendPhotosForbiddenError, FloodWaitError, RPCError
+from telethon.errors.rpcerrorlist import FloodWaitError, RPCError
 from telethon.sessions import StringSession
 from dotenv import load_dotenv  # <-- add this
 
