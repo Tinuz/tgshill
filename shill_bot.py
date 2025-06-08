@@ -3,6 +3,7 @@ import random
 import os
 from telethon.sync import TelegramClient
 from telethon.errors import FloodWaitError
+from telethon.errors.rpcerrorlist import ChatSendPhotosForbiddenError
 from telethon.sessions import StringSession
 from dotenv import load_dotenv  # <-- add this
 
@@ -102,9 +103,12 @@ def get_random_image():
 async def send_shill_message(client, group, message):
     try:
         image_path = get_random_image()
-        # Soms geen afbeelding meesturen voor variatie
         if random.random() < 0.7 and image_path:
-            await client.send_file(group, image_path, caption=message)
+            try:
+                await client.send_file(group, image_path, caption=message)
+            except ChatSendPhotosForbiddenError:
+                print(f"⚠️ Can't send photo to {group}, sending text only.")
+                await client.send_message(group, message)
         else:
             await client.send_message(group, message)
         print(f"✅ Sent to {group}")
