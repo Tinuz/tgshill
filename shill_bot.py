@@ -4,7 +4,7 @@ import os
 import requests
 from telethon.sync import TelegramClient
 from telethon.errors import FloodWaitError
-from telethon.errors.rpcerrorlist import ChatSendPhotosForbiddenError
+from telethon.errors.rpcerrorlist import ChatSendPhotosForbiddenError, FloodWaitError, RPCError
 from telethon.sessions import StringSession
 from dotenv import load_dotenv  # <-- add this
 
@@ -111,9 +111,12 @@ async def send_shill_message(client, group, message):
             try:
                 await client.send_file(group, image_path, caption=message)
                 sent_with_image = True
-            except ChatSendPhotosForbiddenError:
-                print(f"⚠️ Can't send photo to {group}, sending text only.")
-                await client.send_message(group, message)
+            except RPCError as e:
+                if getattr(e, 'code', None) == 403 and 'CHAT_SEND_PHOTOS_FORBIDDEN' in str(e):
+                    print(f"⚠️ Can't send photo to {group}, sending text only.")
+                    await client.send_message(group, message)
+                else:
+                    raise
         else:
             await client.send_message(group, message)
         print(f"✅ Sent to {group}")
