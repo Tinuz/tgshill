@@ -1,6 +1,7 @@
 import asyncio
 import random
 import os
+import requests
 from telethon.sync import TelegramClient
 from telethon.errors import FloodWaitError
 from telethon.errors.rpcerrorlist import ChatSendPhotosForbiddenError
@@ -13,6 +14,8 @@ load_dotenv()  # <-- load .env file
 API_ID = os.getenv('API_ID')  # <-- get from .env
 API_HASH = os.getenv('API_HASH')  # <-- get from .env
 SESSION_STRING = os.getenv('SESSION_STRING')
+
+REMOTE_API_URL = os.getenv('REMOTE_API_URL')
 
 GROUPS = [
     'https://t.me/shillgrow',
@@ -103,20 +106,44 @@ def get_random_image():
 async def send_shill_message(client, group, message):
     try:
         image_path = get_random_image()
+        sent_with_image = False
         if random.random() < 0.7 and image_path:
             try:
                 await client.send_file(group, image_path, caption=message)
+                sent_with_image = True
             except ChatSendPhotosForbiddenError:
                 print(f"⚠️ Can't send photo to {group}, sending text only.")
                 await client.send_message(group, message)
         else:
             await client.send_message(group, message)
         print(f"✅ Sent to {group}")
+        # Log naar API sturen
+        try:
+            requests.post(
+                f"{REMOTE_API_URL}/api/logs",
+                json={
+                    "group": group,
+                    "message": "Posted with image" if sent_with_image else "Posted text only"
+                }
+            )
+        except Exception as log_exc:
+            print(f"⚠️ Failed to log to API: {log_exc}")
     except FloodWaitError as e:
         print(f"⏳ Flood wait triggered: sleeping {e.seconds} seconds for group {group}")
         await asyncio.sleep(e.seconds + 10)
     except Exception as e:
         print(f"❌ Failed to send to {group}: {e}")
+        # Log fout naar API
+        try:
+            requests.post(
+                f"{REMOTE_API_URL}/api/logs",
+                json={
+                    "group": group,
+                    "message": f"Failed: {e}"
+                }
+            )
+        except Exception as log_exc:
+            print(f"⚠️ Failed to log error to API: {log_exc}")
 
 async def main():
     async with TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH) as client:
