@@ -65,8 +65,9 @@ Say less — $FOOF is pure chaos wrapped in a coin.
 💥 Ticker: $FOOF
 📉 Price: 0.000004406
 💰 MC: 4.28K
-📜 CA: BVMxQqAgzBaUZQaEn1V74v5dKAUQykKSSEtMJJvWbonk
-🧨 Burn contest: https://foofurskatje-3uuf.vercel.app/
+📜 CA: EU1SX1z4J7RtZzDkRWPTfFsXBu3Jzn6p3fU7NF8Upump
+🧨 Burn contest: https://foofurburnchaos.vercel.app
+🌐 Website: https://foofurskatje-3uuf.vercel.app/
 💬 Telegram: https://t.me/+gE6sb9xW8d5kZjI8
 🐦 X: https://x.com/foofurskatje?s=21&t=S4OrVfGUBPJZJmlWZohR8A
 
@@ -82,9 +83,9 @@ No roadmap. No promises. Just absurdity.
 💥 Ticker: $FOOF
 📉 Price: 0.000004406
 💰 MC: 4.28K
-📜 CA: BVMxQqAgzBaUZQaEn1V74v5dKAUQykKSSEtMJJvWbonk
-
-🎮 Burn contest: https://foofurskatje-3uuf.vercel.app/
+📜 CA: EU1SX1z4J7RtZzDkRWPTfFsXBu3Jzn6p3fU7NF8Upump
+🧨 Burn contest: https://foofurburnchaos.vercel.app
+🌐 Website: https://foofurskatje-3uuf.vercel.app/
 💬 Telegram: https://t.me/+gE6sb9xW8d5kZjI8
 🐦 X: https://x.com/foofurskatje?s=21&t=S4OrVfGUBPJZJmlWZohR8A
 
